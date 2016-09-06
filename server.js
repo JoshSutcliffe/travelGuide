@@ -4,6 +4,7 @@ var app = express();
 var bodyParser = require("body-parser");
 
 // routes
+// Does passing in app here cause app to append to the file path?
 require('./app/routes.js')(app);
 
 // listen (start app with node server.js)
