@@ -54,10 +54,13 @@
 
 		// ===== GRAB THE JSON FROM THE CLICK EVENT
 		$scope.userSearch = function() {
+			var origin = autocomplete.GAResult2.getPlace();
 			var destination = autocomplete.GAResult1.getPlace();
 			// console.log(place.input)
 			// CALL A FUNCTION TO FILL OUT HTML MAP WITH DATA
 			$scope.googleMap(destination);
+			// CURRENCY CONVERTER FUNCTION
+			$scope.currencyConverter(origin, destination)
 		};
 
 		// ===== FUNCTION TO ADD THE MAP AFTER THE USER SEARCH
@@ -81,6 +84,11 @@
 			marker.setVisible(true);
 		};
 
+		// ===== CURRENCY CONVERTER
+		$scope.currencyConverter = function(origin, destination) {
+			console.log(origin.adr_address);
+			console.log(destination.adr_address);
+		}
 	});
 
 }());
