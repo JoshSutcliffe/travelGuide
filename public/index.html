@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
 <body ng-controller="TravelAppController">
 	<!-- HOME PAGE AND SEARCH BAR -->
@@ -19,8 +20,11 @@
 	<!-- EVERYTHING FOR SHOWING SEARCH INFO -->
 	<!-- build templates here for api info -->
 	<!-- use ng-cloak to hide data-->
-	<div>
-		
+	<div class="container"">
+		<!-- STYLE MAP PARENT FOR SIZES OF THE MAP -->
+		<div class=map-parent>
+			<div id="map"></div>
+		</div>
 	</div>
 
 	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&types=(cities)&key=" + placesKey></script>  

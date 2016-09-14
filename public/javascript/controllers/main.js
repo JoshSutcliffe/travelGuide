@@ -29,6 +29,14 @@
 
 				// Create the autopcomplete object
 				return new google.maps.places.Autocomplete(input, options);
+			},
+			// HANDLE ALL DATA FOR THE MAP CALL
+			googleMap: function(map) {
+		        var marker = new google.maps.Marker({
+		            map: map,
+		            anchorPoint: new google.maps.Point(0, -29)
+		        });
+		        return marker;
 			}
 		};
 		return factoryFunctions
@@ -43,9 +51,28 @@
 		$scope.userSearch = function() {
 			var place = autocomplete.getPlace();
 			// CALL A FUNCTION TO FILL OUT HTML WITH DATA
-			// $scope.getApis(place.name);
-			console.log(place.name)
+			// console.log(place.geometry.viewport);
+			$scope.googleMap(place);
+		};
 
+		// ===== FUNCTION TO ADD THE MAP AFTER THE USER SEARCH
+		$scope.googleMap = function(userPlace) {
+			var elem = document.getElementById('map');
+	        var map = new google.maps.Map(elem, {
+	          center: {lat: -33.8688, lng: 151.2195},
+	          zoom: 13
+	        });
+			var marker = TravelAppFactory.googleMap(map);
+			// map.fitBounds(userPlace.geometry.viewport);
+			marker.setIcon({
+				url: userPlace.icon,
+	            size: new google.maps.Size(71, 71),
+	            origin: new google.maps.Point(0, 0),
+	            anchor: new google.maps.Point(17, 34),
+	            scaledSize: new google.maps.Size(35, 35)
+			});
+			marker.setPosition(userPlace.geometry.location);
+			marker.setVisible(true);
 		};
 
 	});
