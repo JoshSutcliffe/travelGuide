@@ -15,7 +15,8 @@
 
 				// ===== MAPS AND AUTOCOMPLETE
 				// Get the html input element for the autocomplete search box
-				var input = document.getElementById('pac-input');
+				var origin = document.getElementById('origin-input');
+				var destination = document.getElementById('destination-input');
 
 				// THESE BOUNDS ARE GLOBAL - DOESN'T ADD ANY BIAS
 				var defaultBounds = new google.maps.LatLngBounds(
@@ -27,8 +28,12 @@
 					bounds: defaultBounds
 				};
 
-				// Create the autopcomplete object
-				return new google.maps.places.Autocomplete(input, options);
+				// Create the autocomplete object
+				return GAResults = {
+					GAResult1: new google.maps.places.Autocomplete(destination, options),
+					GAResult2: new google.maps.places.Autocomplete(origin, options)
+				};
+				
 			},
 			// HANDLE ALL DATA FOR THE MAP CALL
 			googleMap: function(map) {
@@ -49,29 +54,30 @@
 
 		// ===== GRAB THE JSON FROM THE CLICK EVENT
 		$scope.userSearch = function() {
-			var place = autocomplete.getPlace();
-			// CALL A FUNCTION TO FILL OUT HTML WITH DATA
-			// console.log(place.geometry.viewport);
-			$scope.googleMap(place);
+			var destination = autocomplete.GAResult1.getPlace();
+			// console.log(place.input)
+			// CALL A FUNCTION TO FILL OUT HTML MAP WITH DATA
+			$scope.googleMap(destination);
 		};
 
 		// ===== FUNCTION TO ADD THE MAP AFTER THE USER SEARCH
-		$scope.googleMap = function(userPlace) {
+		$scope.googleMap = function(userDestination) {
+			var userDestinationLat = userDestination.geometry.location.lat();
+			var userDestinationLng = userDestination.geometry.location.lng();
 			var elem = document.getElementById('map');
 	        var map = new google.maps.Map(elem, {
-	          center: {lat: -33.8688, lng: 151.2195},
+	          center: {lat: userDestinationLat, lng: userDestinationLng},
 	          zoom: 13
 	        });
 			var marker = TravelAppFactory.googleMap(map);
-			// map.fitBounds(userPlace.geometry.viewport);
 			marker.setIcon({
-				url: userPlace.icon,
+				url: userDestination.icon,
 	            size: new google.maps.Size(71, 71),
 	            origin: new google.maps.Point(0, 0),
 	            anchor: new google.maps.Point(17, 34),
 	            scaledSize: new google.maps.Size(35, 35)
 			});
-			marker.setPosition(userPlace.geometry.location);
+			marker.setPosition(userDestination.geometry.location);
 			marker.setVisible(true);
 		};
 
