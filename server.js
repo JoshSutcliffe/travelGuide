@@ -4,6 +4,7 @@ var path = require('path');
 var app = express();
 var bodyParser = require("body-parser");
 var wc = require('which-country');
+console.log(wc);
 
 // app.configure(function() {
 // 	app.set('views', __dirname + '/public/views');

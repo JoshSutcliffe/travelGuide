@@ -86,11 +86,16 @@
 
 		// ===== CURRENCY CONVERTER
 		$scope.currencyConverter = function(origin, destination) {
-			console.log(origin);
-			// console.log(origin.formatted_address.split(",").pop());
-			// console.log(destination.formatted_address.split(",").pop());
-			console.log(destination);
-		}
+
+			var originLat = origin.geometry.location.lat();
+			var originLng = origin.geometry.location.lng();
+			var originCty = wc([originLat, originLng]);
+			console.log(originCty);
+			var destinationLat = destination.geometry.location.lat();
+			var destinationLng = destination.geometry.location.lng();
+
+			// $.getJSON("http://apilayer.net/api/live?access_key=" + config.CURRENCY_KEY)
+		};
 	});
 
 }());
