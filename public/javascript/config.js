@@ -1,4 +1,5 @@
 //===== SET UP API KEYS HERE - MAKE IT A GIT IGNORE FILE
 var config = {
-	PLACES_KEY: 'AIzaSyAaKVEpbo0OmdhFq-ScdpthfgzL3rxQFqc'
+	PLACES_KEY: 'AIzaSyAaKVEpbo0OmdhFq-ScdpthfgzL3rxQFqc',
+	CURRENCY_KEY: '41220025833a53c4eb3e3051f64ea618'
 };
