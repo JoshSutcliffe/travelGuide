@@ -86,8 +86,10 @@
 
 		// ===== CURRENCY CONVERTER
 		$scope.currencyConverter = function(origin, destination) {
-			console.log(origin.adr_address);
-			console.log(destination.adr_address);
+			console.log(origin);
+			// console.log(origin.formatted_address.split(",").pop());
+			// console.log(destination.formatted_address.split(",").pop());
+			console.log(destination);
 		}
 	});
 
