@@ -56,8 +56,7 @@
 		$scope.userSearch = function() {
 			var origin = autocomplete.GAResult2.getPlace();
 			var destination = autocomplete.GAResult1.getPlace();
-			// console.log(place.input)
-			// CALL A FUNCTION TO FILL OUT HTML MAP WITH DATA
+			// FILL OUT HTML MAP WITH DATA
 			$scope.googleMap(destination);
 			// CURRENCY CONVERTER FUNCTION
 			$scope.currencyConverter(origin, destination)
@@ -87,9 +86,11 @@
 		// ===== CURRENCY CONVERTER
 		$scope.currencyConverter = function(origin, destination) {
 
+            console.log(which-country);
+            
 			var originLat = origin.geometry.location.lat();
 			var originLng = origin.geometry.location.lng();
-			var originCty = wc([originLat, originLng]);
+			var originCty = wcExport([originLat, originLng]);
 			console.log(originCty);
 			var destinationLat = destination.geometry.location.lat();
 			var destinationLng = destination.geometry.location.lng();
