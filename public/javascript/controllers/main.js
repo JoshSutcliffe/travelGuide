@@ -1,6 +1,6 @@
 // set up controllers here
 (function() { 
-
+    
 	var travelApp = angular.module('travelApp', []);
 
 	// ===== TRY AND DO EVERYTHING TO DO WITH DATA IN THE SERVICE (THINK OF IT AS A MODEL)
@@ -85,12 +85,10 @@
 
 		// ===== CURRENCY CONVERTER
 		$scope.currencyConverter = function(origin, destination) {
-
-            console.log(which-country);
             
 			var originLat = origin.geometry.location.lat();
 			var originLng = origin.geometry.location.lng();
-			var originCty = wcExport([originLat, originLng]);
+            var originCty = (originLat, originLng);
 			console.log(originCty);
 			var destinationLat = destination.geometry.location.lat();
 			var destinationLng = destination.geometry.location.lng();

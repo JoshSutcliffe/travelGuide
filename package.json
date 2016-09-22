@@ -9,7 +9,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "^13.1.0",
     "gulp": "^3.9.1",
-    "gulp-connect": "^5.0.0"
+    "gulp-connect": "^5.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.8"
   }
 }
