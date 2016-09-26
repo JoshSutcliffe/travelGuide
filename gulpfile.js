@@ -2,11 +2,9 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var bodyParser = require("body-parser");
-var wc = require('which-country');
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var browserify = require('browserify');
-var source = require('vinyl-source-stream');
 
 gulp.task('connect', function () {
 	connect.server({

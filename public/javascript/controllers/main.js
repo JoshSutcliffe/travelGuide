@@ -86,10 +86,17 @@
 		// ===== CURRENCY CONVERTER
 		$scope.currencyConverter = function(origin, destination) {
             
+            // ===== GRAB THE COUNTRY NAME
+            var destCountry;
+            for(var i = 0; i < destination.address_components.length; i++) {
+                if(destination.address_components[i].types[0] == "country") {
+                    destCountry = destination.address_components[i].long_name;
+                    break
+                }; 
+            };
+            
 			var originLat = origin.geometry.location.lat();
 			var originLng = origin.geometry.location.lng();
-            var originCty = (originLat, originLng);
-			console.log(originCty);
 			var destinationLat = destination.geometry.location.lat();
 			var destinationLng = destination.geometry.location.lng();
 
