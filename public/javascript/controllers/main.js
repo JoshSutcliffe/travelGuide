@@ -56,8 +56,21 @@
 		$scope.userSearch = function() {
 			var origin = autocomplete.GAResult2.getPlace();
 			var destination = autocomplete.GAResult1.getPlace();
+            
+            // ===== GRAB THE COUNTRY NAME
+            var destCountry;
+            for(var i = 0; i < destination.address_components.length; i++) {
+                if(destination.address_components[i].types[0] == "country") {
+                    var country = destination.address_components[i].long_name;
+                    destCountry = country.toLowerCase().replace(/\s/g, "-");
+                    break
+                }; 
+            };
+            
 			// FILL OUT HTML MAP WITH DATA
 			$scope.googleMap(destination);
+            // NOMAD LIST API
+            $scope.nomadList(destination, destCountry);
 			// CURRENCY CONVERTER FUNCTION
 			$scope.currencyConverter(origin, destination)
 		};
@@ -83,25 +96,36 @@
 			marker.setVisible(true);
 		};
 
-		// ===== CURRENCY CONVERTER
-		$scope.currencyConverter = function(origin, destination) {
+        // ===== NOMAD LIST API
+        $scope.nomadList = function(destination, destCountry) {
             
             // ===== GRAB THE COUNTRY NAME
             var destCountry;
             for(var i = 0; i < destination.address_components.length; i++) {
                 if(destination.address_components[i].types[0] == "country") {
-                    destCountry = destination.address_components[i].long_name;
+                    var country = destination.address_components[i].long_name;
+                    destCountry = country.toLowerCase().replace(/\s/g, "-");
                     break
                 }; 
             };
             
-			var originLat = origin.geometry.location.lat();
-			var originLng = origin.geometry.location.lng();
-			var destinationLat = destination.geometry.location.lat();
-			var destinationLng = destination.geometry.location.lng();
+            var api = "https://nomadlist.com/api/v2/list/cities/amsterdam-netherlands";
+            console.log(destination);
+            
+            $.getJSON(api, {
+                format: "json"
+            }).done(function(data) {
+                console.log(data);
+            });
+            
+        }
+        
+		// ===== CURRENCY CONVERTER
+		$scope.currencyConverter = function(origin, destination) {
 
 			// $.getJSON("http://apilayer.net/api/live?access_key=" + config.CURRENCY_KEY)
 		};
+        
 	});
 
 }());
