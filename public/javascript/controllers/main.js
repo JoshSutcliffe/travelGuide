@@ -42,7 +42,23 @@
 		            anchorPoint: new google.maps.Point(0, -29)
 		        });
 		        return marker;
-			}
+			},
+            // GRAB COUNTRY NAME
+            destinationCountry: function(destination) {
+                var destCountry;
+                for(var i = 0; i < destination.address_components.length; i++) {
+                    if(destination.address_components[i].types[0] == "country") {
+                        var country = destination.address_components[i].long_name;
+                        destCountry = country.toLowerCase().replace(/\s/g, "-");
+                        break
+                    }; 
+                };
+                return destCountry;
+            },
+            // GRAB CITY NAME
+            destinationCity: function(destination) {
+                return destination.address_components[0].long_name.toLowerCase();
+            }
 		};
 		return factoryFunctions
 	}]);
@@ -57,20 +73,10 @@
 			var origin = autocomplete.GAResult2.getPlace();
 			var destination = autocomplete.GAResult1.getPlace();
             
-            // ===== GRAB THE COUNTRY NAME
-            var destCountry;
-            for(var i = 0; i < destination.address_components.length; i++) {
-                if(destination.address_components[i].types[0] == "country") {
-                    var country = destination.address_components[i].long_name;
-                    destCountry = country.toLowerCase().replace(/\s/g, "-");
-                    break
-                }; 
-            };
-            
 			// FILL OUT HTML MAP WITH DATA
 			$scope.googleMap(destination);
             // NOMAD LIST API
-            $scope.nomadList(destination, destCountry);
+            $scope.nomadList(destination);
 			// CURRENCY CONVERTER FUNCTION
 			$scope.currencyConverter(origin, destination)
 		};
@@ -97,20 +103,13 @@
 		};
 
         // ===== NOMAD LIST API
-        $scope.nomadList = function(destination, destCountry) {
+        $scope.nomadList = function(destination) {
             
             // ===== GRAB THE COUNTRY NAME
-            var destCountry;
-            for(var i = 0; i < destination.address_components.length; i++) {
-                if(destination.address_components[i].types[0] == "country") {
-                    var country = destination.address_components[i].long_name;
-                    destCountry = country.toLowerCase().replace(/\s/g, "-");
-                    break
-                }; 
-            };
+            var destCountry = TravelAppFactory.destinationCountry(destination);
+            var destCity = TravelAppFactory.destinationCity(destination);
             
-            var api = "https://nomadlist.com/api/v2/list/cities/amsterdam-netherlands";
-            console.log(destination);
+            var api = "https://nomadlist.com/api/v2/list/cities/" + destCity + "-" + destCountry;
             
             $.getJSON(api, {
                 format: "json"
