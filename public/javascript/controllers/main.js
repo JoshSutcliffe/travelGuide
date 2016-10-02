@@ -118,14 +118,14 @@
             // ===== GRAB THE COUNTRY NAME & CITY
             var destCountry = TravelAppFactory.destinationCountry(destination);
             var destCity = TravelAppFactory.destinationCity(destination);
-            
             var api = "https://nomadlist.com/api/v2/list/cities/" + destCity + "-" + destCountry;
             
-            TravelAppFactory.nomadResult(api, function({
-                console.log("your in");
-            }))
-
-        }
+            TravelAppFactory.nomadResult(api, function() {
+                console.log("cheese");
+            })
+//            console.log("before listing nomadresult");
+//            console.log("heres the nomadresult " + nomadResult);
+        };
         
 		// ===== CURRENCY CONVERTER
 		$scope.currencyConverter = function(origin, destination) {
