@@ -114,7 +114,16 @@
             $.getJSON(api, {
                 format: "json"
             }).done(function(data) {
-                console.log(data);
+                var results = data.result[0];
+//                $(".nomad-list").append("<li>data.result[0].scores</li>");
+                // data.result[0] to get results
+//                console.log(data);
+//                $(".nomad-list").append("<li>" + data.result[0].scores + "</li>");
+                for(var i = 0; i < results.cost.length; i++) {
+//                    $(".nomad-list").append("<li>" + data.result[0].scores[i] + "</li>");
+                    debugger
+                    console.log(data.result[0].cost[i]);
+                }
             });
             
         }
