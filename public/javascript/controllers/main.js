@@ -58,16 +58,6 @@
             // GRAB CITY NAME
             destinationCity: function(destination) {
                 return destination.address_components[0].long_name.toLowerCase();
-            },
-            // Get Nomad List Result
-            nomadResult: function(api) {
-                $.getJSON(api, {
-                    format: "json"
-                }).done(function(data) {
-                    var result = data.result[0];
-                    console.log(result);
-                    return result;
-                })
             }
 		};
 		return factoryFunctions
@@ -120,11 +110,20 @@
             var destCity = TravelAppFactory.destinationCity(destination);
             var api = "https://nomadlist.com/api/v2/list/cities/" + destCity + "-" + destCountry;
             
-            TravelAppFactory.nomadResult(api, function() {
-                console.log("cheese");
-            })
-//            console.log("before listing nomadresult");
-//            console.log("heres the nomadresult " + nomadResult);
+            // Get Nomad List Result
+            var nomadResult = function(api) {
+                $.getJSON(api, {
+                    format: "json"
+                }).done(function(data) {
+                    var scoreValuesObj = data.result[0].scores;
+                    for(var i = 0; i < 14; i++) {
+                        console.log(Object.keys(scoreValuesObj)[i]);
+                        console.log(Object.values(scoreValuesObj)[i]);
+                    }
+                })
+            }
+            nomadResult(api);
+
         };
         
 		// ===== CURRENCY CONVERTER
