@@ -115,10 +115,12 @@
                 $.getJSON(api, {
                     format: "json"
                 }).done(function(data) {
-                    var scoreValuesObj = data.result[0].scores;
-                    for(var i = 0; i < 14; i++) {
-                        console.log(Object.keys(scoreValuesObj)[i]);
-                        console.log(Object.values(scoreValuesObj)[i]);
+                    var costValuesObj = data.result[0].cost;
+                    for(var i = 0; i < 13; i++) {
+                        $('.nomad ul').append('<li>' + Object.keys(costValuesObj)[i] + '</li>');
+                        console.log(Object.keys(costValuesObj)[i]);
+                        debugger
+                        console.log(Object.values(costValuesObj)[i][0]);
                     }
                 })
             }
